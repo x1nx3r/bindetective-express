@@ -1,0 +1,47 @@
+# Node modules (already included in Docker image through npm install)
+
+node_modules
+
+# Documentation files
+
+api-documentation.md
+
+# Local environment files
+
+`
+.env
+.env.local
+.env.production
+.env.development
+
+# Firebase service account key (do not include sensitive information in Docker images)
+
+SAKey.json
+
+# Logs
+
+logs
+\*.log
+
+# Git files
+
+.git
+.gitignore
+
+# Docker files
+
+.dockerignore
+Dockerfile\*
+
+# IDE or editor-specific files
+
+.vscode
+.idea
+\*.swp
+
+# Test files
+
+tests
+_.spec.js
+_.test.js
+coverage
