@@ -14,7 +14,7 @@ exports.createUser = async (req, res) => {
     }
 
     // Add new user document to 'users' collection in Firestore
-    await db.collection("users").doc(userId).set({
+    await db.collection("users").doc(userId).setj({
       userName,
       dateOfBirth,
     });
@@ -87,6 +87,12 @@ exports.deleteUserById = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const usersSnapshot = await db.collection("users").get(); // Get all user documents from Firestore
+
+    // Check if there are no users
+    if (usersSnapshot.empty) {
+      return res.status(404).send({ message: "No users found" });
+    }
+
     const users = usersSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
