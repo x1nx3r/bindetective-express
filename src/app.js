@@ -18,11 +18,11 @@ const { getAuth } = require("firebase-admin/auth");
 const PORT = process.env.PORT || 7070;
 
 // Use a hard-coded flag to toggle emulator
-const USE_FIRESTORE_EMULATOR = true; // Set to `false` for deployment
-const USE_AUTH_EMULATOR = true; // Set to `false` for deployment
+const USE_FIRESTORE_EMULATOR = false; // Set to `false` for deployment
+const USE_AUTH_EMULATOR = false; // Set to `false` for deployment
 
 if (!USE_FIRESTORE_EMULATOR) {
-  // Initialize Firebase app with service account credentials from cloudrun
+  // Initialize Firebase app with service account credentials from cloud run
   initializeApp();
 } else {
   // Firebase service account credentials
