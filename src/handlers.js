@@ -4,17 +4,20 @@
 
 // Handler to create a new user
 // Expected request body: { "userId": "string", "userName": "string", "dateOfBirth": "string" }
+// Handler to create a new user
+// Expected request body: { "userName": "string", "dateOfBirth": "string" }
 exports.createUser = async (req, res) => {
   try {
-    const { userId, userName, dateOfBirth } = req.body;
+    const { userName, dateOfBirth } = req.body;
+    const userId = req.uid; // Use the UID from the authenticated request
 
     // Validate required fields
-    if (!userId || !userName) {
-      return res.status(400).send("userId and userName are required");
+    if (!userName) {
+      return res.status(400).send("userName is required");
     }
 
     // Add new user document to 'users' collection in Firestore
-    await db.collection("users").doc(userId).setj({
+    await db.collection("users").doc(userId).set({
       userName,
       dateOfBirth,
     });

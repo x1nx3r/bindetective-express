@@ -12,6 +12,12 @@ This API allows for CRUD operations on the users collection. Each user document 
 
 ### Base URL : `/users`
 
+### Authentication
+
+All endpoints require an authorization token in the request header.
+
+- Header : `Authorization: Bearer <idToken>`
+
 ### Endpoints
 
 - [Create User](#1-create-user)
@@ -23,16 +29,13 @@ This API allows for CRUD operations on the users collection. Each user document 
 ### 1. Create User
 
 - URL : `/users`
-
 - Method : `POST`
-
 - Description : Creates a new user document in the `users` collection.
-
+- Request Header : `Authorization: Bearer <idToken>`
 - Request Body :
 
 ```json
 {
-  "userId": "string", // required, unique user identifier
   "userName": "string", // required, name of the user
   "dateOfBirth": "string" // optional, date of birth in the format YYYY-MM-DD
 }
@@ -56,6 +59,14 @@ This API allows for CRUD operations on the users collection. Each user document 
   }
   ```
 
+  - **401 Unauthorized**: Authorization token missing or invalid.
+
+  ```json
+  {
+    "error": "Authorization token missing" // or "Unauthorized"
+  }
+  ```
+
   - **500 Internal Server Error**: An error occurred while creating the user.
 
 ### 2. Get User by ID
@@ -63,6 +74,7 @@ This API allows for CRUD operations on the users collection. Each user document 
 - URL : `/users/:userId`
 - Method : `GET`
 - Description : Retrieves a user document by its userId.
+- Request Header : `Authorization: Bearer <idToken>`
 - Parameters : `userId` (string): Unique identifier of the user to retrieve.
 - Response :
 
@@ -83,6 +95,14 @@ This API allows for CRUD operations on the users collection. Each user document 
   }
   ```
 
+  - **401 Unauthorized**: Authorization token missing or invalid.
+
+  ```json
+  {
+    "error": "Authorization token missing" // or "Unauthorized"
+  }
+  ```
+
   - **500 Internal Server Error**: An error occurred while retrieving the user.
 
 ### 3. Update User by ID
@@ -90,6 +110,7 @@ This API allows for CRUD operations on the users collection. Each user document 
 - URL : `/users/:userId`
 - Method : `PUT`
 - Description : Updates an existing user document in the `users` collection by `userId`. Fields in the request body are optional; only fields provided will be updated.
+- Request Header : `Authorization: Bearer <idToken>`
 - Parameters : `userId` (string): Unique identifier of the user to update.
 - Request Body :
 
@@ -118,6 +139,14 @@ This API allows for CRUD operations on the users collection. Each user document 
   }
   ```
 
+  - **401 Unauthorized**: Authorization token missing or invalid.
+
+  ```json
+  {
+    "error": "Authorization token missing" // or "Unauthorized"
+  }
+  ```
+
   - **500 Internal Server Error**: An error occurred while updating the user.
 
 ### 4. Delete User by ID
@@ -125,6 +154,7 @@ This API allows for CRUD operations on the users collection. Each user document 
 - URL : `/users/:userId`
 - Method : `DELETE`
 - Description : Deletes a user document from the `users` collection by `userId`.
+- Request Header : `Authorization: Bearer <idToken>`
 - Parameters : `userId` (string): Unique identifier of the user to delete.
 - Response :
 
@@ -144,6 +174,14 @@ This API allows for CRUD operations on the users collection. Each user document 
   }
   ```
 
+  - **401 Unauthorized**: Authorization token missing or invalid.
+
+  ```json
+  {
+    "error": "Authorization token missing" // or "Unauthorized"
+  }
+  ```
+
   - **500 Internal Server Error**: An error occurred while deleting the user.
 
 ### 5. Get All Users
@@ -151,6 +189,7 @@ This API allows for CRUD operations on the users collection. Each user document 
 - URL : `/users`
 - Method : `GET`
 - Description : Retrieves all user documents from the `users` collection.
+- Request Header : `Authorization: Bearer <idToken>`
 - Response :
 
   - **200 OK**: Returns an array of user objects.
@@ -169,6 +208,14 @@ This API allows for CRUD operations on the users collection. Each user document 
     },
     ...
   ]
+  ```
+
+  - **401 Unauthorized**: Authorization token missing or invalid.
+
+  ```json
+  {
+    "error": "Authorization token missing" // or "Unauthorized"
+  }
   ```
 
   - **500 Internal Server Error**: An error occurred while fetching the users.

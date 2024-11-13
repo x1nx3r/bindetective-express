@@ -12,12 +12,14 @@ require("dotenv").config();
 // Firebase Admin SDK initialization
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
+const { getAuth } = require("firebase-admin/auth");
 
 // Set the port where the app will run
 const PORT = process.env.PORT || 7070;
 
 // Use a hard-coded flag to toggle emulator
 const USE_FIRESTORE_EMULATOR = true; // Set to `false` for deployment
+const USE_AUTH_EMULATOR = true; // Set to `false` for deployment
 
 if (!USE_FIRESTORE_EMULATOR) {
   // Initialize Firebase app with service account credentials from cloudrun
@@ -42,6 +44,11 @@ if (USE_FIRESTORE_EMULATOR) {
     host: "localhost:8080", // Firestore emulator host
     ssl: false, // Disable SSL for the emulator connection
   });
+}
+
+if (USE_AUTH_EMULATOR) {
+  console.log("Using Auth emulator...");
+  process.env.FIREBASE_AUTH_EMULATOR_HOST = "localhost:9099"; // Auth emulator host
 }
 
 const app = express(); // Initialize Express app
